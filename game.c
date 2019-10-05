@@ -7,8 +7,25 @@
  * Constants
  */
 
+// Size of both players
+// [rows]
 #define PLAYER_SIZE 5
+
+// Speed of players
+// [rows per frame per board_heigth]
 #define PLAYER_SPEED 0.008
+
+// X component of ball speed
+// [cols per frame per board_width]
+#define BALL_SPEED_X 0.0014
+
+// Max of y component of ball speed (y speed is random)
+// [rows per frame per board_width]
+#define BALL_SPEED_Y_MAX 0.0018
+
+// Delay berween frames
+// [µs]
+#define FRAME_DELAY 10000
 
 /*
  * Valiables
@@ -21,7 +38,8 @@ int GREEN, WHITE, RED, WHITE_TEXT;
  * Code
  */
 
-int my_round(float x);
+int my_round(float x); // Return int - rounded 'x'
+int random_sign();     // Return either -1 or 1
 
 int main(int argc, char** argv) {
 	// Random setup
@@ -58,12 +76,12 @@ int main(int argc, char** argv) {
 	int p2_score = 0;
 	float ball_pos_x = game_width / 2;
 	float ball_pos_y = game_height / 2;
-	float ball_speed_x = ((float)rand() / RAND_MAX + 3) * game_width / 2500 * (rand() % 2 * 2 - 1);
-	float ball_speed_y = ((float)rand() / RAND_MAX + 3) * game_height / 2000 * (rand() % 2 * 2 - 1);
+	float ball_speed_x = random_sign() * BALL_SPEED_X     * game_width;
+	float ball_speed_y = random_sign() * BALL_SPEED_Y_MAX * game_height * ((float)rand() / RAND_MAX);
 
 	// Loop...
 	while (1) {
-		
+	
 		/*
 		 * User input
 		 */
@@ -148,8 +166,8 @@ int main(int argc, char** argv) {
 				p2_score += 10;
 				ball_pos_x = game_width / 2;
 				ball_pos_y = game_height / 2;
-				ball_speed_x = ((float)rand() / RAND_MAX + 2) * game_width / 1500 * (rand() % 2 * 2 - 1);
-				ball_speed_y = ((float)rand() / RAND_MAX + 2) * game_height / 1500 * (rand() % 2 * 2 - 1);
+				ball_speed_x = random_sign() * BALL_SPEED_X     * game_width;
+				ball_speed_y = random_sign() * BALL_SPEED_Y_MAX * game_height * ((float)rand() / RAND_MAX);
 			}
 		} else if (ball_pos_x > game_width - 4) {
 			if (p2_pos <= ball_pos_y && p2_pos + PLAYER_SIZE > ball_pos_y) {
@@ -161,8 +179,8 @@ int main(int argc, char** argv) {
 				p2_score -= 10;
 				ball_pos_x = game_width / 2;
 				ball_pos_y = game_height / 2;
-				ball_speed_x = ((float)rand() / RAND_MAX + 2) * game_width / 1500 * (rand() % 2 * 2 - 1);
-				ball_speed_y = ((float)rand() / RAND_MAX + 2) * game_height / 1500 * (rand() % 2 * 2 - 1);
+				ball_speed_x = random_sign() * BALL_SPEED_X     * game_width;
+				ball_speed_y = random_sign() * BALL_SPEED_Y_MAX * game_height * ((float)rand() / RAND_MAX);
 			}
 		}
 
@@ -224,7 +242,7 @@ int main(int argc, char** argv) {
 
 		// Refresh and whait
 		refresh();
-		usleep(10000);
+		usleep(FRAME_DELAY);
 	}
 
 	return 0;
@@ -235,4 +253,8 @@ int my_round(float x) {
 	if (x - n >= 0.5)
 		return n+1;
 	return n;
+}
+
+int random_sign() {
+	return rand() % 2 * 2 - 1;
 }
