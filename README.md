@@ -6,7 +6,8 @@ Compile on linux with:<br>
 or just<br>
 <i>make</i><br>
 or<br>
-<i>make run</i> to compile and run game<br>
+<i>make run</i><br>
+to compile and run game<br>
 <hr>
 Game<br>
 W/S - Move left player<br>
