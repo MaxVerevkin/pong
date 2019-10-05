@@ -162,8 +162,7 @@ int main(int argc, char** argv) {
 				ball_speed_x *= -1;
 				ball_speed_y += p1_dir * PLAYER_SPEED * game_height / 5;
 			} else {
-				p1_score -= 10;
-				p2_score += 10;
+				p2_score += 1;
 				ball_pos_x = game_width / 2;
 				ball_pos_y = game_height / 2;
 				ball_speed_x = random_sign() * BALL_SPEED_X     * game_width;
@@ -175,8 +174,7 @@ int main(int argc, char** argv) {
 				ball_speed_x *= -1;
 				ball_speed_y += p2_dir * PLAYER_SPEED * game_height / 5;
 			} else {
-				p1_score += 10;
-				p2_score -= 10;
+				p1_score += 1;
 				ball_pos_x = game_width / 2;
 				ball_pos_y = game_height / 2;
 				ball_speed_x = random_sign() * BALL_SPEED_X     * game_width;
