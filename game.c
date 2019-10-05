@@ -232,7 +232,7 @@ int main(int argc, char** argv) {
 		addch(RED);
 
 		// Print score
-		move(HEIGHT-2, WIDTH/2-5);
+		move(HEIGHT-2, WIDTH/2-2);
 		printw("SCORE");
 		move(HEIGHT-2, WIDTH/4-1);
 		printw("%i", p1_score);
