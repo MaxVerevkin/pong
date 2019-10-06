@@ -3,11 +3,11 @@ all: game
 run: game
 	./game
 
-game: clear
+game: clean
 	gcc game.c -lncurses -o game
 
-debug: clear
+debug: clean
 	gcc -g game.c -lncurses -o game
 
-clear:
+clean:
 	rm -f game
